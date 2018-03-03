@@ -2,7 +2,7 @@ defmodule PhpCodeGeneratorTest do
   use ExUnit.Case
   doctest PhpCodeGenerator
 
-  test "greets the world" do
-    assert PhpCodeGenerator.hello() == :world
+  test "php code can be generated" do
+    assert (:ok = CodeParserState.Example.generate |> PhpCodeGenerator.generate)
   end
 end
