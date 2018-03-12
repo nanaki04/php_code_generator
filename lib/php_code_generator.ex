@@ -15,20 +15,20 @@ defmodule PhpCodeGenerator do
   @private_property_template File.read! "templates/private_property.tmpl"
 
   @spec generate(code_parser_state, options) :: :ok
-  def generate(code_parser_state, _options \\ []) do
+  def generate(code_parser_state, options \\ []) do
     BoilerplateGenerator.generate(code_parser_state,
       extension: ".php",
-      class_template: @class_template,
-      enum_template: @enum_template,
-      enum_property_template: @enum_property_template,
-      interface_template: @interface_template,
-      interface_method_template: @interface_method_template,
-      interface_property_template: @interface_property_template,
-      method_template: @method_template,
-      method_parameter_doc_template: @method_parameter_doc_template,
-      public_property_template: @public_property_template,
-      private_property_template: @private_property_template,
-      decorators: [PhpCodeGenerator.Decorator]
+      class_template: Keyword.get(options, :class_template, @class_template),
+      enum_template: Keyword.get(options, :enum_template, @enum_template),
+      enum_property_template: Keyword.get(options, :enum_property_template, @enum_property_template),
+      interface_template: Keyword.get(options, :interface_template, @interface_template),
+      interface_method_template: Keyword.get(options, :interface_method_template, @interface_method_template),
+      interface_property_template: Keyword.get(options, :interface_property_template, @interface_property_template),
+      method_template: Keyword.get(options, :method_template, @method_template),
+      method_parameter_doc_template: Keyword.get(options, :method_parameter_doc_template, @method_parameter_doc_template),
+      public_property_template: Keyword.get(options, :public_property_template, @public_property_template),
+      private_property_template: Keyword.get(options, :private_property_template, @private_property_template),
+      decorators: [PhpCodeGenerator.Decorator | Keyword.get(options, :decorators, [])]
     )
   end
 
