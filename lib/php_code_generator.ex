@@ -16,19 +16,19 @@ defmodule PhpCodeGenerator do
 
   @spec generate(code_parser_state, options) :: :ok
   def generate(code_parser_state, options \\ []) do
-    BoilerplateGenerator.generate(code_parser_state,
-      extension: ".php",
-      class_template: Keyword.get(options, :class_template, @class_template),
-      enum_template: Keyword.get(options, :enum_template, @enum_template),
-      enum_property_template: Keyword.get(options, :enum_property_template, @enum_property_template),
-      interface_template: Keyword.get(options, :interface_template, @interface_template),
-      interface_method_template: Keyword.get(options, :interface_method_template, @interface_method_template),
-      interface_property_template: Keyword.get(options, :interface_property_template, @interface_property_template),
-      method_template: Keyword.get(options, :method_template, @method_template),
-      method_parameter_doc_template: Keyword.get(options, :method_parameter_doc_template, @method_parameter_doc_template),
-      public_property_template: Keyword.get(options, :public_property_template, @public_property_template),
-      private_property_template: Keyword.get(options, :private_property_template, @private_property_template),
-      decorators: [PhpCodeGenerator.Decorator | Keyword.get(options, :decorators, [])]
+    BoilerplateGenerator.generate(code_parser_state, options
+      |> Keyword.put_new(:extension, ".php")
+      |> Keyword.put_new(:class_template, @class_template)
+      |> Keyword.put_new(:enum_template, @enum_template)
+      |> Keyword.put_new(:enum_property_template, @enum_property_template)
+      |> Keyword.put_new(:interface_template, @interface_template)
+      |> Keyword.put_new(:interface_method_template, @interface_method_template)
+      |> Keyword.put_new(:interface_property_template, @interface_property_template)
+      |> Keyword.put_new(:method_template, @method_template)
+      |> Keyword.put_new(:method_parameter_doc_template, @method_parameter_doc_template)
+      |> Keyword.put_new(:public_property_template, @public_property_template)
+      |> Keyword.put_new(:private_property_template, @private_property_template)
+      |> Keyword.update(:decorators, [], &[PhpCodeGenerator.Decorator | &1])
     )
   end
 
