@@ -28,7 +28,7 @@ defmodule PhpCodeGenerator do
       |> Keyword.put_new(:method_parameter_doc_template, @method_parameter_doc_template)
       |> Keyword.put_new(:public_property_template, @public_property_template)
       |> Keyword.put_new(:private_property_template, @private_property_template)
-      |> Keyword.update(:decorators, [], &[PhpCodeGenerator.Decorator | &1])
+      |> Keyword.update(:decorators, [PhpCodeGenerator.Decorator], &[PhpCodeGenerator.Decorator | &1])
     )
   end
 
